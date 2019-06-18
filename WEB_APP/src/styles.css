@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0 !important;
+    box-sizing: border-box !important;
+
+}
+
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+body, html {
+    margin: auto !important;
+
+
+}
+
+/* color pallete
+
+color 1  #33658a
+color 2  #86bbd8
+colro 3  #2f4858
+color 4  #f6ae2d
+color 5  #f26419 
+
+
+*/

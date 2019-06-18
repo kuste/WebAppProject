@@ -1,0 +1,28 @@
+.mainWrapper {
+    display: grid;
+    grid-template-columns: minmax(200px,20vw) auto;
+    grid-auto-rows: 48px auto;
+    grid-template-areas: "header header" "sidebar content""sidebar content";
+    height: 100vh;
+    background-color: #86bbd8;
+    min-height: 800px;
+  
+}
+
+.header {
+    grid-area: header;
+    height: 100%;
+
+}
+
+.sidebar {
+    grid-area: sidebar;
+    height: 100%;
+
+}
+
+.content {
+    grid-area: content;
+    height: 100%;
+
+}

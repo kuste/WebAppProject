@@ -1,0 +1,127 @@
+<div class="wrapper">
+    <div class="row ">
+        <div>
+            <form
+                [formGroup]="registerForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <div class="form-group">
+                    <label for>First Name</label>
+                    <div class="row">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="first-name"
+                            formControlName="first-name"
+                            placeholder="Enter First Name"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!registerForm.get('first-name').valid && registerForm.get('first-name').touched"
+                        >
+                            * This field is required
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Last Name</label>
+                    <div class="row">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="last-name"
+                            formControlName="last-name"
+                            placeholder="Enter Last Name"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!registerForm.get('last-name').valid && registerForm.get('last-name').touched"
+                        >
+                            * This field is required
+                        </span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>E-mail</label>
+                    <div class="row">
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            formControlName="email"
+                            placeholder="Enter E-mail"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched "
+                        >
+                            * This field is required, must be a valid email!
+                        </span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Password</label>
+                    <div class="row">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            formControlName="password"
+                            placeholder="Enter Pssword"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched "
+                        >
+                            * This field is required, must be 6 characters or longer!
+                        </span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Confirm Password</label>
+                    <div class="row">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="confirm-password"
+                            formControlName="confirm-password"
+                            placeholder="Repeat Pssword"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!registerForm.get('confirm-password').valid && registerForm.get('confirm-password').touched"
+                        >
+                            * This field is required, must be 6 characters or longer!
+                        </span>
+
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <span
+                    class="help-block"
+                    *ngIf="!registerForm.valid && registerForm.touched"
+                >
+                    Please enter the correct values in the reqired fields!
+                </span>
+
+                <br>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!registerForm.valid"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
