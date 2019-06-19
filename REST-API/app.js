@@ -13,6 +13,7 @@ mongoose.connect("mongodb+srv://kuste:" + process.env.MOGO_ATLAS_PW + "@node-res
 mongoose.Promise = global.Promise
 
 app.use(morgan("dev"))
+app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

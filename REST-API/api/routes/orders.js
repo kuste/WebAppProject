@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 
 const Order = require("../models/order")
 const Product = require("../models/product")
+
 //handle incoming requests to /orders
 router.get("/", (req, res, next) => {
   Order.find()
@@ -39,7 +40,7 @@ router.post("/", (req, res, next) => {
     .then(product => {
       if (!product) {
         return res.status(404).json({
-          message: "Product not found"
+          message: "Order not found"
         })
       }
       const order = new Order({
