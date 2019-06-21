@@ -1,5 +1,6 @@
 {
     "env":{
-       "MOGO_ATLAS_PW" :"apipass8520"
+       "MOGO_ATLAS_PW" :"apipass8520",
+       "JWT_KEY":"cj8uNBis55TRVxYNq_P3GJbNnen45VP0t_KsyZtVkXXyR4AJ8MGNFq9M1FxnAhbWjiIi2QYRTvSi3PdKImcDOaKtzarLDPPXTQrhG8OMLwVVCKun-uErX6YGtp5cqJ02aUuZfkrd_jOS_EVhWfG-Xy4DVmRCmQwvoxqqwPoKMR9ngRBH1QDM22mOyqkfQ0Lfb2NgzpfoinpwJdDJwnwQ"
     }
 }
