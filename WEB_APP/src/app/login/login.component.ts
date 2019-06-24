@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+import { AuthService } from '../services/auth.service'
+
 
 @Component({
   selector: 'app-login',
@@ -7,15 +10,39 @@ import { NgForm } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  isAuthorized;
+  constructor(private authService: AuthService, private router: Router) { }
 
-  constructor() { }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      'email': new FormControl(null, Validators.required),
+      'password': new FormControl(null, Validators.required && Validators.minLength(6)),
+    });
   }
-  onSubmit(form: NgForm) {
-    console.log(form.value);
-    form.reset()
+
+
+  onSubmit() {
+    const email = this.loginForm.get('email').value
+    const password = this.loginForm.get('password').value
+
+
+    this.authService.loginUser(email, password)
+    if (this.authService.isLoggedIn) {
+      console.log(this.authService.isLoggedIn);
+
+  /*     let redirect = this.authService.redirectUrl ? this.router.parseUrl(this.authService.redirectUrl) : '/content';
+      this.router.navigateByUrl(redirect); */
+    }
+
+
+
+
+
+
 
 
   }
+
 }

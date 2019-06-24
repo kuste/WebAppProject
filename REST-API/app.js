@@ -2,21 +2,19 @@ const express = require("express")
 const app = express()
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
-const mongoose = require("mongoose")
-
 const productRoutes = require("./api/routes/products")
 const orderRoutes = require("./api/routes/orders")
 const userRoutes = require("./api/routes/user")
 
-mongoose.connect("mongodb+srv://kuste:" + process.env.MOGO_ATLAS_PW + "@node-rest-api-7y9da.mongodb.net/test?retryWrites=true&w=majority", {
-  useCreateIndex: true,
-  useNewUrlParser: true
-})
-mongoose.Promise = global.Promise
+const db = require("./api/config/database")
+
+db.authenticate()
+  .then(() => console.log("Database connected..."))
+  .catch(err => console.log("Error " + err))
 
 app.use(morgan("dev"))
 app.use("/uploads", express.static("uploads"))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
@@ -33,7 +31,7 @@ app.use((req, res, next) => {
 //routes wich should handle requests
 app.use("/products", productRoutes)
 app.use("/orders", orderRoutes)
-app.use("/user", userRoutes);
+app.use("/user", userRoutes)
 
 app.use((req, res, next) => {
   const error = new Error("Not found!")

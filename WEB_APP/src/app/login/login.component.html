@@ -1,9 +1,9 @@
-<!-- <div class="wrapper">
+<div class="wrapper">
     <div class="row ">
         <div>
             <form
-                #loginForm="ngForm"
-                (ngSubmit)="onSubmit(loginForm)"
+                [formGroup]="loginForm"
+                (ngSubmit)="onSubmit()"
             >
                 <div class="form-group">
                     <label for>E-mail</label>
@@ -12,10 +12,7 @@
                             type="email"
                             class="form-control"
                             id="email"
-                            ngModel
-                            name="email"
-                            required
-                            email
+                            formControlName="email"
                             placeholder="Enter E-mail"
                         >
                     </div>
@@ -29,10 +26,7 @@
                             type="password"
                             class="form-control"
                             id="password"
-                            ngModel
-                            name="password"
-                            required
-                            minlength="6"
+                            formControlName="password"
                             placeholder="Enter Pssword"
                         >
                     </div>
@@ -53,4 +47,3 @@
 
     </div>
 </div>
- -->

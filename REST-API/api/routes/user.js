@@ -9,6 +9,6 @@ router.post("/login", UserControler.user_login)
 
 router.delete("/:userId", checkAuth, UserControler.user_delete)
 
-router.get("/", checkAuth, UserControler.user_get_all)
+router.get("/", UserControler.user_get_all)
 
 module.exports = router

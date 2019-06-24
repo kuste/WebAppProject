@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const User = require("../models/user")
+
 
 exports.user_signup = (req, res, next) => {
   User.find({ email: req.body.email })
@@ -44,6 +46,7 @@ exports.user_signup = (req, res, next) => {
 
 exports.user_login = (req, res, next) => {
   User.find({ email: req.body.email })
+
     .exec()
     .then(user => {
       if (user.length < 1) {
@@ -103,27 +106,5 @@ exports.user_delete = (req, res, next) => {
 }
 
 exports.user_get_all = (req, res, next) => {
-  User.find()
-    .select("_id email")
-    .exec()
-    .then(docs => {
-      const response = {
-        count: docs.length,
-        User: docs.map(doc => {
-          return {
-            _id: doc._id,
-            email: doc.email,
-            request: {
-              type: "DELETE",
-              url: "http://localhost:3000/user/" + doc._id
-            }
-          }
-        })
-      }
-      res.status(200).json(response)
-    })
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ error: err })
-    })
+   
 }

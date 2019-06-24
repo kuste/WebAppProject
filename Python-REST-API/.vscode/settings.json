@@ -1,0 +1,7 @@
+{
+  "python.pythonPath": "C:\\Users\\K\\.virtualenvs\\Python-REST-API-N1n-99Ks\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+ 
+}
