@@ -10,10 +10,10 @@ import { Observable } from 'rxjs'
 
 export class ApiService {
 
-    url = 'ec2-46-137-187-23.eu-west-1.compute.amazonaws.com'
+    url = 'http://localhost:3000/user/login'
     httpOptions = {
         headers: new HttpHeaders({
-             
+             'Host':'ec2-46-137-187-23.eu-west-1.compute.amazonaws.com',
              'Database':'d9oqstb3ttf4ou',
              'User':'rourrnllgplnrh',
              'Port':'5432',
