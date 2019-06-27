@@ -11,20 +11,53 @@ export class AuthService {
     redirectUrl: string
     token: string
     isLoggedIn = false;
+    errorMsg: String
     constructor(private apiService: ApiService) { }
 
+
+    public getError() {
+        return this.errorMsg
+    }
 
     public loginUser(email: string, password: string) {
         const loginUser = {
             email: email,
             password: password
         }
-        this.apiService.login(loginUser)
-            .subscribe(res => {
-                this.token = res.token,
-                    this.isLoggedIn = true,
-                    console.log(res);
-            })
+
+        this.apiService.login(loginUser).subscribe(
+            res => { console.log(res) },
+            error => {
+                console.log(error);
+                this.errorMsg = error.error.message
+
+            },
+            () => {
+                console.log('done');
+            }
+
+        )
+
+
+
+
+    }
+
+
+    public registeUser(firstName: String, lastName: String, email: string, password: string) {
+        const registerUser = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        }
+
+        this.apiService.signup(registerUser).subscribe(res => {
+            console.log(res);
+
+        })
+
+
 
     }
 

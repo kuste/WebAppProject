@@ -1,7 +1,19 @@
 <div class="wrapper">
     <div class="row ">
         <div>
+            <div *ngIf="isLoading">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div
+                *ngIf="errorMsg"
+                class="alert alert-danger"
+                style="width: 262.563px !important;"
+            >
+                {{errorMsg}}
+            </div>
+
             <form
+                *ngIf="!isLoading"
                 [formGroup]="loginForm"
                 (ngSubmit)="onSubmit()"
             >

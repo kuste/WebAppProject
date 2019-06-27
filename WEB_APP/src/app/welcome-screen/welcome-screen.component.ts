@@ -9,10 +9,13 @@ export class WelcomeScreenComponent implements OnInit {
 
   isLogin = false;
   isRegister = false;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  
 
   onLoginClick(){
     this.isLogin= true

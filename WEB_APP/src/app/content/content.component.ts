@@ -7,12 +7,18 @@ import { ApiService } from '../services/api.service'
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  user
-  constructor(private apiService: ApiService) { }
+
+  gigs;
+  constructor(private apiSrvice: ApiService) {
+
+  }
 
   ngOnInit() {
 
-   
+
+
+
+
   }
 
 }

@@ -11,8 +11,9 @@ import { ContentComponent } from './content/content.component';
 import { SideBarComponent } from './content/side-bar/side-bar.component';
 import { AuthComponent } from './auth/auth.component'
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule } from '@angular/common/http';
+import { GigDisplayComponent } from './content/gig-display/gig-display.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,10 @@ import { HttpClientModule } from '@angular/common/http'
     LoginComponent,
     ContentComponent,
     SideBarComponent,
-    AuthComponent
+    AuthComponent,
+    GigDisplayComponent,
+    LoadingSpinnerComponent
+    
 
 
   ],

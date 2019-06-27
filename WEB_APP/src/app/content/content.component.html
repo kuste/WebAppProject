@@ -3,9 +3,17 @@
         <app-header></app-header>
     </div>
     <div class="content">
-        <div *ngFor="let u of user">{{u}}</div>
+
+        <div
+            class="item"
+            *ngFor="let g of gigs"
+        >
+        <br>
+            <app-gig-display [gig]="g"></app-gig-display>
+      
+        </div>
     </div>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <app-side-bar></app-side-bar>
-    </div>
+    </div> -->
 </div>

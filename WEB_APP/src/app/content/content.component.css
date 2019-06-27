@@ -2,9 +2,9 @@
     display: grid;
     grid-template-columns: minmax(200px, 20vw);
     grid-template-rows: 48px auto;
-    grid-template-areas: "header header" "sidebar content" "sidebar content";
-    height: 100vh;
-    background-color: #86bbd8;
+    grid-template-areas: "header  header"
+                         "content  content";
+    height: 100%;
     min-height: 800px;
 }
 
@@ -12,10 +12,8 @@
     grid-area: header;
 }
 
-.sidebar {
-    grid-area: sidebar;
+.content {
+    grid-area: content;
+    justify-self: center;
 }
 
-.content {
-    grid-area: sidebar;
-}

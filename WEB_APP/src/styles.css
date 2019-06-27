@@ -3,18 +3,16 @@
 * {
     margin: 0 !important;
     box-sizing: border-box !important;
-
 }
 
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    font-size: 16px;
+    font-weight: 200;
 }
 
 body, html {
     margin: auto !important;
-
-
 }
 
 /* color pallete
