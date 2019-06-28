@@ -1,19 +1,4 @@
-.mainWrapper {
-    display: grid;
-    grid-template-columns: minmax(200px, 20vw);
-    grid-template-rows: 48px auto;
-    grid-template-areas: "header  header"
-                         "content  content";
-    height: 100%;
-    min-height: 800px;
-}
-
-.header {
-    grid-area: header;
-}
-
 .content {
-    grid-area: content;
-    justify-self: center;
+    display: grid;
+    justify-content: center;
 }
-

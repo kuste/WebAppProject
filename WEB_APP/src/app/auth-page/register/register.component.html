@@ -12,6 +12,13 @@
             >
                 {{errorMsg}}
             </div>
+            <div
+                *ngIf="successMsg"
+                class="alert alert-success"
+                style="width: 262.563px !important;"
+            >
+                {{successMsg}}
+            </div>
 
             <form
                 *ngIf="!isLoading"

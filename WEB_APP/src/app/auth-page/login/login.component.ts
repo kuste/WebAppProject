@@ -1,10 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '../../services/auth.service'
 import { Subscription } from 'rxjs';
 import { EventEmitter } from 'events'
-import { ApiService } from '../services/api.service'
+import { ApiService } from '../../services/api.service'
 import { JwtHelperService } from '@auth0/angular-jwt'
 
 
@@ -33,12 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-  myRawToken;
-  helper = new JwtHelperService();
-
-
-
-
   onSubmit() {
 
     const email = this.loginForm.get('email').value
@@ -47,13 +41,11 @@ export class LoginComponent implements OnInit {
     this.isLoading = true
     this.apiService.login({ email, password }).subscribe(
       res => {
-        console.log(res)
         this.isLoading = false
-        this.myRawToken = res.token
       },
       error => {
         console.log(error);
-        this.errorMsg = error.error.message
+        this.errorMsg = error
         this.isLoading = false
 
       },
@@ -61,22 +53,13 @@ export class LoginComponent implements OnInit {
         console.log('done');
         this.isLoading = false
         this.errorMsg = null
+        this.router.navigate(['/content'])
+
 
       }
     )
 
-
-    /*    this.loginForm.reset() */
-    if (this.authService.isLoggedIn) {
-      console.log(this.authService.isLoggedIn);
-
-      /*     let redirect = this.authService.redirectUrl ? this.router.parseUrl(this.authService.redirectUrl) : '/content';
-          this.router.navigateByUrl(redirect); */
-    }
-
-
-
-
+    this.loginForm.reset()
 
 
 

@@ -1,19 +1,11 @@
 <div class="mainWrapper">
-    <div class="header">
-        <app-header></app-header>
-    </div>
+
     <div class="content">
 
-        <div
-            class="item"
-            *ngFor="let g of gigs"
-        >
-        <br>
-            <app-gig-display [gig]="g"></app-gig-display>
-      
+        <div *ngFor="let p of posts">
+            <br>
+            <app-post-presenter [post]="p"></app-post-presenter>
         </div>
     </div>
-    <!-- <div class="sidebar">
-        <app-side-bar></app-side-bar>
-    </div> -->
+
 </div>

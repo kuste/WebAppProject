@@ -1,0 +1,25 @@
+<div class="bg-pic"></div>
+<div class="content">
+    <h2>Welcome!</h2>
+    <br>
+  <!--   <div class="buttons">
+        <button
+            type="button"
+            class="btn btn-default"
+            (click)="onLoginClick()"
+        >
+            Login
+        </button>
+        <button
+            type="button"
+            class="btn btn-default"
+            (click)="onRegisterClick()"
+        >
+            Register
+        </button>
+    </div> -->
+    <div class="login-register-form">
+        <app-register *ngIf="url==='/auth/register'"></app-register>
+        <app-login *ngIf="url==='/auth/login'"></app-login>
+    </div>
+</div>

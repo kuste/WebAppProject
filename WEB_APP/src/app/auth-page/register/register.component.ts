@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service'
-import { ApiService } from '../services/api.service'
+import { AuthService } from '../../services/auth.service'
+import { ApiService } from '../../services/api.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -10,10 +11,11 @@ import { ApiService } from '../services/api.service'
 })
 export class RegisterComponent implements OnInit {
   errorMsg: String = null;
+  successMsg: String = null;
   isLoading: boolean = false
   registerForm: FormGroup;
 
-  constructor(private authSevice: AuthService, private apiService: ApiService) { }
+  constructor(private router: Router, private authSevice: AuthService, private apiService: ApiService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -23,46 +25,48 @@ export class RegisterComponent implements OnInit {
       'passwordGroup': new FormGroup({
         'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
         'confirm-password': new FormControl(null, [Validators.required, Validators.minLength(6)])
-      }, { validators: this.checkPasswords })
+      }, this.checkPasswords)
     });
   }
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+  checkPasswords(group: FormGroup) {
     let pass = group.get('password').value
     let confirmPass = group.get('confirm-password').value
 
-    return pass === confirmPass ? null : { notSame: true }
+    return pass === confirmPass ? null : { 'mismatch': true }
   }
 
   onSubmit() {
-    console.log(this.registerForm);
     const firstName = this.registerForm.get('first-name').value
     const lastName = this.registerForm.get('last-name').value
     const email = this.registerForm.get('email').value
-    const password = this.checkPasswords(this.registerForm)
+    const password = this.registerForm.get('passwordGroup').get('password').value
 
-    console.log(this.registerForm, password);
+    this.isLoading = true
+    this.apiService.signup({ firstName, lastName, email, password })
+      .subscribe(
+        res => {
+          console.log(res.message)
+          this.isLoading = false
+          this.successMsg = res.message
+        },
+        error => {
+          console.log(error);
+          this.errorMsg = error
+          this.isLoading = false
 
-    /*   this.apiService.signup({ firstName, lastName, email, password })
-        .subscribe(
-          res => {
-            console.log(res)
-            this.isLoading = false
-          },
-          error => {
-            console.log(error);
-            this.errorMsg = error.error.message
-            this.isLoading = false
-  
-          },
-          () => {
-            console.log('done');
-            this.isLoading = false
-            this.errorMsg = null
-          }
-        ) */
+        },
+        () => {
+          console.log('done');
+          this.isLoading = false
+          this.errorMsg = null
+          setTimeout(() => {
+            this.router.navigateByUrl('/login')
+          }, 650);
+        }
+      )
 
-    /*     this.registerForm.reset()
-     */
+    /* this.registerForm.reset() */
+
 
   }
 }
