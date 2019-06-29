@@ -70,10 +70,9 @@ export class ApiService {
             expirationData)
         this.userId = id;
         this.user.next(user)
-
     }
 
-
+  
 
     private handleError(errorRes: HttpErrorResponse) {
         let errorMsg = 'An unknown error occured!'

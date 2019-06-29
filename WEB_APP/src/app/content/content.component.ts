@@ -12,16 +12,16 @@ export class ContentComponent implements OnInit {
 
   email;
   posts: IPostDto[] = []
-  constructor(private apiSrvice: ApiService) {
+  constructor(private apiService: ApiService) {
 
   }
 
   ngOnInit() {
 
     //take one value from observable then unsubscribe
-    this.apiSrvice.user.pipe(take(1)).subscribe()
+    this.apiService.user.pipe(take(1)).subscribe()
 
-    this.apiSrvice.getAllUserPosts().subscribe(res => {
+    this.apiService.getAllUserPosts().subscribe(res => {
       this.posts = res.posts
     })
 

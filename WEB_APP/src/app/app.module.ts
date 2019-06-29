@@ -9,11 +9,15 @@ import { RegisterComponent } from './auth-page/register/register.component';
 import { LoginComponent } from './auth-page/login/login.component';
 import { ContentComponent } from './content/content.component';
 import { SideBarComponent } from './content/side-bar/side-bar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { PostPresenterComponent } from './content/post-presenter/post-presenter.component';
-import { AuthPageComponent } from './auth-page/auth-page.component'
+import { AuthPageComponent } from './auth-page/auth-page.component';
+import { CreatePostComponent } from './content/create-post/create-post.component';
+import { UserPageComponent } from './content/user-page/user-page.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -26,16 +30,20 @@ import { AuthPageComponent } from './auth-page/auth-page.component'
     SideBarComponent,
     LoadingSpinnerComponent,
     PostPresenterComponent,
-    AuthPageComponent
-    
+    AuthPageComponent,
+    CreatePostComponent,
+    UserPageComponent,
 
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

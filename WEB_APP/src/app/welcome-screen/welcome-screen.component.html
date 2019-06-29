@@ -1,6 +1,8 @@
+<div class="bg-pic"></div>
+
 <div class="posts">
     <div *ngFor="let p of posts">
-        <br>
         <app-post-presenter [post]="p"></app-post-presenter>
+        <div class="space"></div>
     </div>
 </div>

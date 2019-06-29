@@ -6,6 +6,8 @@ import { LoginComponent } from './auth-page/login/login.component'
 import { ContentComponent } from './content/content.component'
 import { AuthGuardService } from './services/auth-guard.service'
 import { AuthPageComponent } from './auth-page/auth-page.component'
+import { CreatePostComponent } from './content/create-post/create-post.component'
+import { UserPageComponent } from './content/user-page/user-page.component'
 
 const routes: Routes = [
 
@@ -16,10 +18,13 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
     ]
   },
-  { path: 'content', component: ContentComponent,children:[
-    { path: 'createpost', component: WelcomeScreenComponent },
-    { path: 'user', component: WelcomeScreenComponent },
-  ]},
+  {
+    path: 'content', component: ContentComponent
+  },
+  { path: 'createpost', component: CreatePostComponent },
+  { path: 'user', component: UserPageComponent },
+
+
   { path: '**', component: WelcomeScreenComponent, redirectTo: '' }
 ];
 

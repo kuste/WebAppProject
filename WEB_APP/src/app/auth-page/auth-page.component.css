@@ -7,9 +7,11 @@
     background-position: center;
     filter: blur(4px);
     -webkit-filter: blur(3px) brightness(80%);
-    position: relative;
+    position: absolute;
     z-index: -999999;
     min-height: 800px;
+    top: 0;
+    left: 0;
     
 
 }
