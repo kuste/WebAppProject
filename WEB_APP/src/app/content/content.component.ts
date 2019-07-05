@@ -19,11 +19,12 @@ export class ContentComponent implements OnInit {
   ngOnInit() {
 
     //take one value from observable then unsubscribe
-    this.apiService.user.pipe(take(1)).subscribe()
-
     this.apiService.getAllUserPosts().subscribe(res => {
       this.posts = res.posts
-    })
+
+    },
+      error => { console.log(error) }
+    )
 
 
   }

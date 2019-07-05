@@ -20,7 +20,7 @@ exports.posts_get_all = (req, res, next) => {
             endDate: doc.endDate,
             additionalInfo: doc.additionalInfo,
             whatIsOffered: doc.whatIsOffered,
-            user: doc.user
+            contactEmail: doc.contactEmail
           }
         })
       }
@@ -48,6 +48,7 @@ exports.posts_create_post = (req, res, next) => {
           message: "User not found"
         })
       }
+      console.log(req.body)
       const post = new Post({
         _id: mongoose.Types.ObjectId(),
         user: req.body.user,
@@ -58,7 +59,8 @@ exports.posts_create_post = (req, res, next) => {
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         additionalInfo: req.body.additionalInfo,
-        whatIsOffered: req.body.whatIsOffered
+        whatIsOffered: req.body.whatIsOffered,
+        contactEmail: req.body.contactEmail
       })
       return post.save()
     })
@@ -100,17 +102,17 @@ exports.posts_get_byUserId = (req, res, next) => {
             endDate: doc.endDate,
             additionalInfo: doc.additionalInfo,
             whatIsOffered: doc.whatIsOffered,
-            user: doc.user
+            contactEmail: doc.contactEmail
           }
         })
       }
-      //   if (docs.length >= 0) {
-      res.status(200).json(response)
-      //   } else {
-      //       res.status(404).json({
-      //           message: 'No entries found'
-      //       });
-      //   }
+      if (docs.length >= 0) {
+        res.status(200).json(response)
+      } else {
+        res.status(404).json({
+          message: "No entries found"
+        })
+      }
     })
     .catch(err => {
       console.log(err)

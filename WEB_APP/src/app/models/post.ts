@@ -1,14 +1,15 @@
 import { User } from './user.model'
 
 export interface IPostDto {
-    id: Number,
-    title: String,
-    descr: String,
-    qualifications: String,
-    payment: String,
+    id: string,
+    title: string,
+    descr: string,
+    qualifications: string,
+    payment: string,
     startDate: Date,
     endDate: Date,
-    additionalInfo: String,
-    whatIsOffered: String,
-    user: User
+    additionalInfo: string,
+    whatIsOffered: string,
+    user: User,
+    contactEmail: string
 }

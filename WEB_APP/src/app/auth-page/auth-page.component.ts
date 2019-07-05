@@ -8,8 +8,6 @@ import { NavigationEnd, Router } from '@angular/router'
 })
 export class AuthPageComponent implements OnInit {
 
-
-
   url;
   subs;
 
@@ -26,11 +24,9 @@ export class AuthPageComponent implements OnInit {
 
     this.subs = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-/*         console.log(this.router.url);
- */        this.url = this.router.url
+        this.url = this.router.url
       }
     })
-
     if (this.url === '/auth/login') {
       this.router.navigate(['/auth/login'])
     }

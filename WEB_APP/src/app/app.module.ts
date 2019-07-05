@@ -10,13 +10,14 @@ import { LoginComponent } from './auth-page/login/login.component';
 import { ContentComponent } from './content/content.component';
 import { SideBarComponent } from './content/side-bar/side-bar.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { PostPresenterComponent } from './content/post-presenter/post-presenter.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { CreatePostComponent } from './content/create-post/create-post.component';
 import { UserPageComponent } from './content/user-page/user-page.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptorService } from './services/auth-interceptor.service'
 
 
 @NgModule({
@@ -43,9 +44,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
- 
+
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from '../../services/api.service'
 
 @Component({
   selector: 'app-create-post',
@@ -17,14 +18,15 @@ export class CreatePostComponent implements OnInit {
   model2
   startDate;
   endDate;
+  user;
 
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.createForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
-      'desc': new FormControl(null, Validators.required),
+      'descr': new FormControl(null, Validators.required),
       'qualifications': new FormControl(null, Validators.required),
       'whatIsOffered': new FormControl(null, Validators.required),
       'payment': new FormControl(null, Validators.required),
@@ -32,18 +34,41 @@ export class CreatePostComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
 
     });
+
+    this.user = JSON.parse(localStorage.getItem('userData'))
+    console.log(this.user);
+
   }
 
   onSubmit() {
 
-    console.log(this.createForm);
-    console.log(this.startDate);
-    console.log(this.endDate);
+
     const newStartDate = new Date(this.startDate.day, this.startDate.month, this.startDate.year)
     const newEndDate = new Date(this.endDate.day, this.endDate.month, this.endDate.year)
     let valid = newStartDate.getTime() < newEndDate.getTime()
-    if (valid) {
+    if (valid && this.createForm.valid && this.user) {
       console.log('valid');
+
+      const post = {
+
+        title: this.createForm.value.title,
+        user: this.user,
+        descr: this.createForm.value.descr,
+        qualifications: this.createForm.value.qualifications,
+        whatIsOffered: this.createForm.value.whatIsOffered,
+        payment: this.createForm.value.payment,
+        additionalInfo: this.createForm.value.additionalInfo,
+        startDate: newStartDate,
+        endDate: newEndDate,
+        contactEmail: this.createForm.value.email
+
+      }
+      console.log(post);
+
+      this.apiService.createPost(post).subscribe(res => {
+        console.log(res);
+
+      })
 
     } else {
       console.log('notvalid');

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { ApiService } from './services/api.service'
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private apiService:ApiService) { }
   ngOnInit() {
-
+    
+    this.apiService.autoLogin()
   }
 
 }

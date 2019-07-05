@@ -11,14 +11,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   private userSub: Subscription;
-  isAuthenticated = false
-
+  isAuthenticated = false;
+  user;
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
 
     this.userSub = this.apiService.user.subscribe(user => {
-      this.isAuthenticated = true
+      this.isAuthenticated = !!user;
+      this.user = user
+      console.log(!user);
+      console.log(!!user);
 
     })
   }
@@ -28,7 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   handleLogout() {
-
-    this.isAuthenticated = false
+    this.apiService.logout()
   }
 }

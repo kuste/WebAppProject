@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service'
 import { ApiService } from '../../services/api.service'
 import { Router } from '@angular/router'
 
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   isLoading: boolean = false
   registerForm: FormGroup;
 
-  constructor(private router: Router, private authSevice: AuthService, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({

@@ -1,6 +1,6 @@
 import { IPostDto } from './post'
 export interface IPostsDto {
-    count: Number,
+    count: number,
     posts: IPostDto[]
 
 }

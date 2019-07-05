@@ -19,12 +19,10 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'content', component: ContentComponent
+    path: 'content', component: ContentComponent, canActivate: [AuthGuardService]
   },
-  { path: 'createpost', component: CreatePostComponent },
-  { path: 'user', component: UserPageComponent },
-
-
+  { path: 'createpost', component: CreatePostComponent , canActivate: [AuthGuardService]},
+  { path: 'user', component: UserPageComponent , canActivate: [AuthGuardService]},
   { path: '**', component: WelcomeScreenComponent, redirectTo: '' }
 ];
 

@@ -12,13 +12,16 @@
             *ngIf="isAuthenticated"
             class="nav navbar-nav"
         >
-            <li routerLinkActive="active-link" >
+            <li routerLinkActive="active-link">
                 <a routerLink="/createpost">Create a post</a>
             </li>
             <li routerLinkActive="active-link">
                 <a routerLink="/user">User settings</a>
             </li>
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+            <li
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
                 <a routerLink="/content">Your posts</a>
             </li>
         </ul>
@@ -26,8 +29,8 @@
             *ngIf="isAuthenticated"
             class="nav navbar-nav navbar-right"
         >
-            <li >
-                <a (click)="handleLogout()" routerLink="/">Logout</a>
+            <li>
+                <a (click)="handleLogout()">Logout</a>
             </li>
         </ul>
         <ul
@@ -43,4 +46,3 @@
         </ul>
     </div>
 </nav>
-
