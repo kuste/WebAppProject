@@ -4,24 +4,15 @@ const morgan = require("morgan")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 
-const productRoutes = require("./api/routes/products")
-const orderRoutes = require("./api/routes/orders")
 const userRoutes = require("./api/routes/user")
 const postsRoutes = require("./api/routes/posts")
 
-mongoose.connect("mongodb+srv://kuste:pass123456@node-rest-api-7y9da.mongodb.net/test?retryWrites=true&w=majority", {
+const uri = "mongodb+srv://kuste:pass123456@node-rest-api-7y9da.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true
 })
-
-/* const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://kuste:pass2210986*@node-rest-api-7y9da.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-}); */
 
 mongoose.Promise = global.Promise
 
@@ -41,8 +32,6 @@ app.use((req, res, next) => {
 })
 
 // Routes which should handle requests
-app.use("/products", productRoutes)
-app.use("/orders", orderRoutes)
 app.use("/user", userRoutes)
 app.use("/posts", postsRoutes)
 

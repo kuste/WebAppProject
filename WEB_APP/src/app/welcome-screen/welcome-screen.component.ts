@@ -9,14 +9,15 @@ import { ApiService } from '../services/api.service'
 export class WelcomeScreenComponent implements OnInit {
 
   posts = []
-
+  isLoading: boolean = false
   constructor(private apiService: ApiService) { }
 
 
   ngOnInit() {
-
+    this.isLoading = true
     this.apiService.getAllPosts().subscribe(posts => {
       this.posts = posts.posts
+      this.isLoading = false
     })
 
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service'
 import { IPostDto } from '../models/post'
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs'
+
 
 @Component({
   selector: 'app-content',
@@ -10,23 +11,80 @@ import { take } from 'rxjs/operators';
 })
 export class ContentComponent implements OnInit {
 
-  email;
   posts: IPostDto[] = []
-  constructor(private apiService: ApiService) {
+  isEditMode = false
+  subscription: Subscription;
+  id: string;
+  post: IPostDto
+  showUpdateModal = false;
+  name;
+  isLoading: boolean = false
 
+  constructor(private apiService: ApiService) {
+  this.posts = this.apiService.userPosts
   }
 
   ngOnInit() {
+    
 
-    //take one value from observable then unsubscribe
+    //TODO move this to login component and make data-handler.service
+    
+
+  /*   this.isLoading = true
     this.apiService.getAllUserPosts().subscribe(res => {
-      this.posts = res.posts
-
+      this.posts = res
+      this.isLoading = false
     },
-      error => { console.log(error) }
+      error => {
+        console.log(error)
+        this.isLoading = false
+      }
+
+    ),
+      () => {
+        this.isLoading = false
+        this.apiService.postUpdated.subscribe((res: IPostDto[]) => {
+          this.posts = res
+          console.log(res);
+          
+        })
+      } */
+  }
+
+  onDelete(i) {
+    console.log(i._id);
+    this.apiService.deletePosts(i._id).subscribe(res => {
+      console.log(res);
+
+    }, err => {
+      console.log(err);
+    },
+      () => {
+        this.apiService.getAllUserPosts().subscribe(res => {
+          this.posts = res
+        })
+      }
     )
 
+  }
 
+  onUpdate(i) {
+    this.showUpdateModal = !this.showUpdateModal
+    this.apiService._updateId.next(i._id)
+
+  }
+  handleEdit() {
+    this.isEditMode = !this.isEditMode
+
+  }
+
+  onClose() {
+    this.showUpdateModal = null
+
+  }
+
+  ngOnDestroy() {
+    this.isEditMode = false
   }
 
 }

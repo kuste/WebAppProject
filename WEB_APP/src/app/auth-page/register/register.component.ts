@@ -59,12 +59,12 @@ export class RegisterComponent implements OnInit {
           this.isLoading = false
           this.errorMsg = null
           setTimeout(() => {
-            this.router.navigateByUrl('/login')
+            this.router.navigate(['/auth/login'])
           }, 650);
         }
       )
 
-    /* this.registerForm.reset() */
+     this.registerForm.reset() 
 
 
   }

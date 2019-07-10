@@ -1,8 +1,14 @@
 <div class="bg-pic"></div>
 
+
 <div class="posts">
     <div *ngFor="let p of posts">
         <app-post-presenter [post]="p"></app-post-presenter>
         <div class="space"></div>
+    </div>
+</div>
+<div class="spinner">
+    <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
     </div>
 </div>

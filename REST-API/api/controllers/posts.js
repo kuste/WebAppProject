@@ -84,7 +84,6 @@ exports.posts_create_post = (req, res, next) => {
 
 exports.posts_get_byUserId = (req, res, next) => {
   const userId = req.params.userId
-  console.log(userId)
   Post.find({ user: userId })
     .populate("user", "_id firstName lastName email ")
     .exec()
@@ -111,6 +110,105 @@ exports.posts_get_byUserId = (req, res, next) => {
       } else {
         res.status(404).json({
           message: "No entries found"
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        error: err
+      })
+    })
+}
+exports.posts_get_One = (req, res, next) => {
+  const id = req.params.postId
+  Post.findById(id)
+    .exec()
+    .then(doc => {
+      const response = {
+        _id: doc._id,
+        title: doc.title,
+        descr: doc.descr,
+        qualifications: doc.qualifications,
+        startDate: doc.startDate,
+        payment: doc.payment,
+        endDate: doc.endDate,
+        additionalInfo: doc.additionalInfo,
+        whatIsOffered: doc.whatIsOffered,
+        contactEmail: doc.contactEmail
+      }
+      if (doc) {
+        res.status(200).json(response)
+      } else {
+        res.status(404).json({
+          message: "No entries found"
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        error: err
+      })
+    })
+}
+exports.posts_update_post = (req, res, next) => {
+  const id = req.params.postId
+  console.log(req.body);
+  
+  const response = {
+    user:req.body.user,
+    title: req.body.title,
+    descr: req.body.descr,
+    qualifications: req.body.qualifications,
+    startDate: req.body.startDate,
+    payment: req.body.payment,
+    endDate: req.body.endDate,
+    additionalInfo: req.body.additionalInfo,
+    whatIsOffered: req.body.whatIsOffered,
+    contactEmail: req.body.contactEmail
+  }
+
+  Post.updateOne({ _id: id }, { $set: response })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Product updated",
+        updatedPost: req.body
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        error: err
+      })
+    })
+}
+
+exports.posts_delete_post = (req, res, next) => {
+  const id = req.params.postId
+
+  Post.findById(id)
+    .exec()
+    .then(result => {
+      if (result) {
+        Post.deleteOne({ _id: id })
+          .exec()
+          .then(post => {
+            res.status(200).json({
+              message: "Post deleted",
+              deletedPost: post
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).json({
+              error: err
+            })
+          })
+      } else {
+        res.status(404).json({
+          message: "No valid entry found for provided ID"
         })
       }
     })

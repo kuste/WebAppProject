@@ -17,7 +17,10 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { CreatePostComponent } from './content/create-post/create-post.component';
 import { UserPageComponent } from './content/user-page/user-page.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthInterceptorService } from './services/auth-interceptor.service'
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { DropdownDirective } from './shared/dropdown.directive';
+import { EditPostComponent } from './content/edit-post/edit-post.component';
+import { PopupModalComponent } from './content/popup-modal/popup-modal.component'
 
 
 @NgModule({
@@ -34,6 +37,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service'
     AuthPageComponent,
     CreatePostComponent,
     UserPageComponent,
+    DropdownDirective,
+    EditPostComponent,
+    PopupModalComponent,
 
 
   ],
@@ -46,7 +52,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service'
     NgbModule,
 
   ],
+
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

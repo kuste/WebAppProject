@@ -3,6 +3,8 @@ nav {
   border-color: transparent !important;
   width: 100%;
   position: fixed;
+  min-width: 600px;
+  z-index: 99999999;
 }
 
 a {
@@ -13,7 +15,6 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 li {
@@ -21,6 +22,7 @@ li {
 }
 
 li a {
+  width: 100%;
   cursor: pointer;
   display: block;
   color: white;
@@ -30,10 +32,16 @@ li a {
   min-height: fit-content !important;
 }
 
+
 li a:hover {
+  width: 100%;
   color: rgb(207, 64, 64) !important;
   background-color: #f6ae2d;
   min-height: fit-content !important;
+}
+
+.btn {
+  background-color: transparent;
 }
 
 .active-link {
@@ -55,4 +63,14 @@ li a:hover {
 
 .navbar-right {
   float: right!important;
+}
+
+.dropdown-menu {
+  background-color: #298066;
+  width: 100%;
+  z-index: 99999999;
+}
+
+.dropdown-menu li {
+  width: 100%;
 }

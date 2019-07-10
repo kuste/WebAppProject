@@ -1,0 +1,198 @@
+<div class="wrapper">
+  <div class="row ">
+      <div>
+          <div
+              *ngIf="errorMsg"
+              class="alert alert-danger"
+          >
+              {{errorMsg}}
+          </div>
+          <div
+              *ngIf="successMsg"
+              class="alert alert-success"
+          >
+              {{successMsg}}
+          </div>
+
+          <form
+              *ngIf="!isLoading"
+              [formGroup]="createForm"
+              (ngSubmit)="onSubmit()"
+          >
+              <div class="form-group">
+                  <label for>Naslov</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="naslov"
+                          formControlName="title"
+                          placeholder="Unesite naslov"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for>Opis</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="opis"
+                          formControlName="descr"
+                          placeholder="Unesite opis"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for>Kvalifikacije</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="kvalifikacije"
+                          formControlName="qualifications"
+                          placeholder="Unesite kvalifikacije"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for>Sto se nudi</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="stoSeNudi"
+                          formControlName="whatIsOffered"
+                          placeholder="unesite sto se nudi"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for>Ponuđena plaća</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="placa"
+                          formControlName="payment"
+                          placeholder="Unesite plaću"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for>Dodatne informacije</label>
+                  <div class="row">
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="dodatneInfo"
+                          formControlName="additionalInfo"
+                          placeholder="Unesite dodatne informacije"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <div class="form-group date">
+                  <label
+                      class="lbl1"
+                      for
+                  >
+                      Datum početka
+                  </label>
+                  <div class="row gr1">
+                      <form class>
+
+                          <input
+                              class="form-control"
+                              placeholder="yyyy-mm-dd"
+                              name="d1"
+                              #c1="ngModel"
+                              [(ngModel)]="startDate"
+                              ngbDatepicker
+                              required
+                              #d1="ngbDatepicker"
+                          >
+                          <div class="input-group-append">
+                              <button
+                                  class="btn btn-outline-secondary calendar"
+                                  (click)="d1.toggle()"
+                                  type="button"
+                              >
+                                  Select
+                              </button>
+                          </div>
+
+                      </form>
+
+                  </div>
+                  <br>
+                  <label
+                      class="lbl2"
+                      for
+                  >
+                      Datum kraja
+                  </label>
+                  <div class="row gr2">
+                      <form class>
+
+                          <input
+                              class="form-control"
+                              placeholder="yyyy-mm-dd"
+                              name="d2"
+                              #c2="ngModel"
+                              [(ngModel)]="endDate"
+                              ngbDatepicker
+                              required
+                              #d2="ngbDatepicker"
+                          >
+                          <div class="input-group-append">
+                              <button
+                                  class="btn btn-outline-secondary calendar"
+                                  (click)="d2.toggle()"
+                                  type="button"
+                              >
+                                  Select
+                              </button>
+                          </div>
+
+                      </form>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for>Kontakt E-mail</label>
+                  <div class="row">
+                      <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          formControlName="email"
+                          placeholder="Enter E-mail"
+                      >
+
+                  </div>
+              </div>
+              <br>
+              <br>
+              <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!createForm.valid"
+              >
+                  Spremi
+              </button>
+          </form>
+      </div>
+
+  </div>
+</div>

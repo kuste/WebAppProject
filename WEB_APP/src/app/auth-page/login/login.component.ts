@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         console.log('done');
         this.isLoading = false
         this.errorMsg = null
+        this.apiService.getAllUserPosts().subscribe()
         this.router.navigate([`/content`])
 
 

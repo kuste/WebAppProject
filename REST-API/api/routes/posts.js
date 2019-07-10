@@ -6,6 +6,9 @@ const postsController = require("../controllers/posts")
 // Handle incoming GET requests to /orders
 router.get("/", postsController.posts_get_all)
 router.post("/", checkAuth, postsController.posts_create_post)
-router.get("/:userId", checkAuth, postsController.posts_get_byUserId)
+router.get("/user/:userId", checkAuth, postsController.posts_get_byUserId)
+router.get("/:postId", checkAuth, postsController.posts_get_One)
+router.patch("/:postId", checkAuth, postsController.posts_update_post);
+router.delete("/:postId", checkAuth, postsController.posts_delete_post);
 
 module.exports = router

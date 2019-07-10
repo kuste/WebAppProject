@@ -23,3 +23,10 @@
 .space {
     height: 15vh
 }
+
+
+.spinner{
+    position: fixed;
+    right: 50%;
+    transform: translate(50%,20vh)
+}

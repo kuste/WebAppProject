@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../services/api.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-create-post',
@@ -21,7 +21,7 @@ export class CreatePostComponent implements OnInit {
   user;
 
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.createForm = new FormGroup({
@@ -36,23 +36,25 @@ export class CreatePostComponent implements OnInit {
     });
 
     this.user = JSON.parse(localStorage.getItem('userData'))
-    console.log(this.user);
 
   }
 
   onSubmit() {
 
 
-    const newStartDate = new Date(this.startDate.day, this.startDate.month, this.startDate.year)
-    const newEndDate = new Date(this.endDate.day, this.endDate.month, this.endDate.year)
-    let valid = newStartDate.getTime() < newEndDate.getTime()
+
+
+    const newStartDate = new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime()
+    const newEndDate = new Date(this.endDate.year, this.endDate.month, this.endDate.day).getTime()
+    let valid = newStartDate < newEndDate
+
     if (valid && this.createForm.valid && this.user) {
       console.log('valid');
 
       const post = {
 
         title: this.createForm.value.title,
-        user: this.user,
+        user: this.user.id,
         descr: this.createForm.value.descr,
         qualifications: this.createForm.value.qualifications,
         whatIsOffered: this.createForm.value.whatIsOffered,
@@ -65,18 +67,29 @@ export class CreatePostComponent implements OnInit {
       }
       console.log(post);
 
+      this.isLoading = true
       this.apiService.createPost(post).subscribe(res => {
         console.log(res);
+        this.isLoading = false
 
-      })
+      },
+        error => {
+          console.log(error);
+          this.isLoading = false
 
-    } else {
-      console.log('notvalid');
+        },
+        () => {
+          this.createForm.reset()
+          this.isLoading = false
+
+          this.router.navigate(['content'])
+        }
+      )
 
     }
-
-
-
-
   }
+
+
+
+
 }
