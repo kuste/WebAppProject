@@ -1,0 +1,50 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <a routerLink="/">Home</a>
+            </li>
+        </ul>
+        <ul
+            *ngIf="isAuthenticated"
+            class="nav navbar-nav"
+        >
+            <li routerLinkActive="active-link">
+                <a routerLink="/createpost">Create a post</a>
+            </li>
+            <li routerLinkActive="active-link">
+                <a routerLink="/user">User settings</a>
+            </li>
+            <li
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <a routerLink="/content">Your posts</a>
+            </li>
+        </ul>
+        <ul
+            *ngIf="isAuthenticated"
+            class="nav navbar-nav navbar-right"
+        >
+         
+            <li>
+                <a (click)="handleLogout()">Logout</a>
+            </li>
+        </ul>
+        <ul
+            *ngIf="!isAuthenticated"
+            class="nav navbar-nav navbar-right"
+        >
+            <li routerLinkActive="active-link">
+                <a routerLink="/auth/login">Login</a>
+            </li>
+            <li routerLinkActive="active-link">
+                <a routerLink="/auth/register">Register</a>
+            </li>
+        </ul>
+        <ul></ul>
+    </div>
+</nav>

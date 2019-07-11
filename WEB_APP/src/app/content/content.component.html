@@ -1,11 +1,48 @@
 <div class="mainWrapper">
-    <div class="header">
-        <app-header></app-header>
+    <div
+        class="content"
+        *ngIf="!isLoading"
+    >
+        <div class="btn-group">
+            <button
+                class="btn btn-primary"
+                (click)="handleEdit()"
+            >
+                Edit
+            </button>
+        </div>
+        <div *ngFor="let p of posts ">
+            <div class="space"></div>
+            <app-post-presenter [post]="p"></app-post-presenter>
+            <div
+                *ngIf="isEditMode"
+                class="buttons"
+            >
+                <button
+                    (click)="onDelete(p)"
+                    class="btn btn-danger"
+                >
+                    Delete
+                </button>
+                <button
+                    (click)="onUpdate(p)"
+                    class="btn btn-primary"
+                >
+                    Update
+                </button>
+            </div>
+            <br>
+            <br>
+        </div>
     </div>
-    <div class="content">
-        <div *ngFor="let u of user">{{u}}</div>
-    </div>
-    <div class="sidebar">
-        <app-side-bar></app-side-bar>
+</div>
+<app-popup-modal
+    *ngIf="showUpdateModal"
+    (close)="onClose()"
+    (submit)="onSubmit()"
+></app-popup-modal>
+<div class="spinner">
+    <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
     </div>
 </div>

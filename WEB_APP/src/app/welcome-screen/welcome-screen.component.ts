@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service'
 
 @Component({
   selector: 'app-welcome-screen',
@@ -7,21 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeScreenComponent implements OnInit {
 
-  isLogin = false;
-  isRegister = false;
-  constructor() { }
+  posts = []
+  isLoading: boolean = false
+  constructor(private apiService: ApiService) { }
+
 
   ngOnInit() {
-  }
-
-  onLoginClick(){
-    this.isLogin= true
-    this.isRegister = false;
-
-  }
-  onRegisterClick(){
-    this.isRegister = true;
-    this.isLogin= false
+    this.isLoading = true
+    this.apiService.getAllPosts().subscribe(posts => {
+      this.posts = posts.posts
+      this.isLoading = false
+    })
 
   }
+
 }

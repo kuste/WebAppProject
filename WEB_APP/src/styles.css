@@ -1,20 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
 
 * {
     margin: 0 !important;
     box-sizing: border-box !important;
-
 }
 
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    font-size: 16px;
+    font-weight: 400;
 }
 
 body, html {
-    margin: auto !important;
-
-
+  
 }
 
 /* color pallete

@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <div class="row ">
+        <div>
+            <div *ngIf="isLoading">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div
+                *ngIf="errorMsg"
+                class="alert alert-danger"
+                style="width: 262.563px !important;"
+            >
+                {{errorMsg}}
+            </div>
+
+            <form
+                *ngIf="!isLoading"
+                [formGroup]="loginForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <div class="form-group">
+                    <label for>E-mail</label>
+                    <div class="row">
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            formControlName="email"
+                            placeholder="Enter E-mail"
+                        >
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Password</label>
+                    <div class="row">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            formControlName="password"
+                            placeholder="Enter Pssword"
+                        >
+                    </div>
+                </div>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!loginForm.valid"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>

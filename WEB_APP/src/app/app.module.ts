@@ -3,15 +3,24 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './content/header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './auth-page/register/register.component';
+import { LoginComponent } from './auth-page/login/login.component';
 import { ContentComponent } from './content/content.component';
 import { SideBarComponent } from './content/side-bar/side-bar.component';
-import { AuthComponent } from './auth/auth.component'
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { PostPresenterComponent } from './content/post-presenter/post-presenter.component';
+import { AuthPageComponent } from './auth-page/auth-page.component';
+import { CreatePostComponent } from './content/create-post/create-post.component';
+import { UserPageComponent } from './content/user-page/user-page.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { DropdownDirective } from './shared/dropdown.directive';
+import { EditPostComponent } from './content/edit-post/edit-post.component';
+import { PopupModalComponent } from './content/popup-modal/popup-modal.component'
 
 
 @NgModule({
@@ -23,17 +32,29 @@ import { HttpClientModule } from '@angular/common/http'
     LoginComponent,
     ContentComponent,
     SideBarComponent,
-    AuthComponent
+    LoadingSpinnerComponent,
+    PostPresenterComponent,
+    AuthPageComponent,
+    CreatePostComponent,
+    UserPageComponent,
+    DropdownDirective,
+    EditPostComponent,
+    PopupModalComponent,
 
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

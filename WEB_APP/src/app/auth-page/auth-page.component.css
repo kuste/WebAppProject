@@ -1,0 +1,51 @@
+.bg-pic {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets/images/adventure-beach-beautiful-2422557.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(4px);
+    -webkit-filter: blur(3px) brightness(80%);
+    position: absolute;
+    z-index: -999999;
+    min-height: 800px;
+    top: 0;
+    left: 0;
+    
+
+}
+.content {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    flex-direction: column; 
+
+}
+
+
+h2 {
+    font: 60px 'Courgette', cursive;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    grid-gap: 20px;
+    
+}
+
+button {
+    padding: 0.6em;
+    width: 8em;
+}
+
+.login-register-form{
+    margin-top: 3em !important; 
+}

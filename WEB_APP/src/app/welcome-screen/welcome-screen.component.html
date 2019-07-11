@@ -1,25 +1,14 @@
 <div class="bg-pic"></div>
-<div class="content">
-    <h2>Welcome!</h2>
-    <br>
-    <div class="buttons">
-        <button
-            type="button"
-            class="btn btn-default"
-            (click)="onLoginClick()"
-        >
-            Login
-        </button>
-        <button
-            type="button"
-            class="btn btn-default"
-            (click)="onRegisterClick()"
-        >
-            Register
-        </button>
+
+
+<div class="posts">
+    <div *ngFor="let p of posts">
+        <app-post-presenter [post]="p"></app-post-presenter>
+        <div class="space"></div>
     </div>
-    <div class="login-register-form">
-        <app-register *ngIf="isRegister "></app-register>
-        <app-login *ngIf="isLogin "></app-login>
+</div>
+<div class="spinner">
+    <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
     </div>
 </div>
