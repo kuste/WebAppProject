@@ -24,13 +24,13 @@ exports.posts_get_all = (req, res, next) => {
           }
         })
       }
-      //   if (docs.length >= 0) {
-      res.status(200).json(response)
-      //   } else {
-      //       res.status(404).json({
-      //           message: 'No entries found'
-      //       });
-      //   }
+      if (docs.length >= 0) {
+        res.status(200).json(response)
+      } else {
+        res.status(404).json({
+          message: "No entries found"
+        })
+      }
     })
     .catch(err => {
       console.log(err)
@@ -88,24 +88,24 @@ exports.posts_get_byUserId = (req, res, next) => {
     .populate("user", "_id firstName lastName email ")
     .exec()
     .then(docs => {
-      const response = {
-        count: docs.length,
-        posts: docs.map(doc => {
-          return {
-            _id: doc._id,
-            title: doc.title,
-            descr: doc.descr,
-            qualifications: doc.qualifications,
-            startDate: doc.startDate,
-            payment: doc.payment,
-            endDate: doc.endDate,
-            additionalInfo: doc.additionalInfo,
-            whatIsOffered: doc.whatIsOffered,
-            contactEmail: doc.contactEmail
-          }
-        })
-      }
       if (docs.length >= 0) {
+        const response = {
+          count: docs.length,
+          posts: docs.map(doc => {
+            return {
+              _id: doc._id,
+              title: doc.title,
+              descr: doc.descr,
+              qualifications: doc.qualifications,
+              startDate: doc.startDate,
+              payment: doc.payment,
+              endDate: doc.endDate,
+              additionalInfo: doc.additionalInfo,
+              whatIsOffered: doc.whatIsOffered,
+              contactEmail: doc.contactEmail
+            }
+          })
+        }
         res.status(200).json(response)
       } else {
         res.status(404).json({
@@ -154,10 +154,10 @@ exports.posts_get_One = (req, res, next) => {
 }
 exports.posts_update_post = (req, res, next) => {
   const id = req.params.postId
-  console.log(req.body);
-  
+  console.log(req.body)
+
   const response = {
-    user:req.body.user,
+    user: req.body.user,
     title: req.body.title,
     descr: req.body.descr,
     qualifications: req.body.qualifications,

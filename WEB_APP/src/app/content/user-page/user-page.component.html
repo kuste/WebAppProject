@@ -1,3 +1,106 @@
-<p>
-  user-page works!
-</p>
+<div class="wrapper">
+    <div class="content">
+        <div class="btn-group">
+            <button
+                class="btn btn-primary"
+                (click)="handleEdit()"
+            >
+                Edit
+            </button>
+        </div>
+        <br>
+        <h2>First name: {{firstName}}</h2>
+        <h2>Lst name name: {{lastName}}</h2>
+        <h2>Email: {{email}}</h2>
+    </div>
+</div>
+<div class="spinner">
+    <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+</div>
+<div
+    *ngIf="showUpdateModal"
+    (click)="handleEdit()"
+>
+    <div class="backdrop"></div>
+    <div class="alert-box">
+        <div class="userForm">
+            <form
+                *ngIf="!isLoading"
+                [formGroup]="userForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <div class="form-group">
+                    <label for>First Name</label>
+                    <div class="row">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="firstName"
+                            formControlName="firstName"
+                            placeholder="Enter First Name"
+                        >
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Last Name</label>
+                    <div class="row">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="lastName"
+                            formControlName="lastName"
+                            placeholder="Enter Last Name"
+                        >
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Email</label>
+                    <div class="row">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="email"
+                            formControlName="email"
+                            placeholder="Enter Email"
+                        >
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for>Password</label>
+                    <div class="row">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            formControlName="password"
+                            placeholder="Enter Pssword"
+                        >
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+        <div class="alert-box-actions">
+            <button
+                class="btn btn-primary"
+                (click)="onClose()"
+            >
+                Zatvori
+            </button>
+        </div>
+    </div>
+</div>

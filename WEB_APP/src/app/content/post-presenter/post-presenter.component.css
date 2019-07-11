@@ -33,13 +33,6 @@
     grid-column: 2/3
 }
 
-.descr {}
-
-.qualification {}
-
-.payment {}
-
-.additionalInfo {}
 
 .whatIsOffered {
     grid-column: 1/3;

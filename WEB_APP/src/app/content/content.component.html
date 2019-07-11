@@ -39,6 +39,7 @@
 <app-popup-modal
     *ngIf="showUpdateModal"
     (close)="onClose()"
+    (submit)="onSubmit()"
 ></app-popup-modal>
 <div class="spinner">
     <div *ngIf="isLoading">

@@ -73,11 +73,11 @@ exports.user_login = (req, res, next) => {
             }
           )
           return res.status(200).json({
+            message: "Auth successful",
             id: user[0]._id,
             firstName: user[0].firstName,
             lastName: user[0].lastName,
             email: user[0].email,
-            message: "Auth successful",
             token: token
           })
         }
@@ -108,4 +108,61 @@ exports.user_delete = (req, res, next) => {
         error: err
       })
     })
+}
+
+exports.user_update = (req, res, next) => {
+  const id = req.params.userId
+  console.log(req.body)
+  if (req.body.password) {
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      if (err) {
+        return res.status(500).json({
+          error: err
+        })
+      } else {
+        const user = new User({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: hash
+        })
+
+        User.updateOne({ _id: id }, { $set: user })
+          .exec()
+          .then(result => {
+            res.status(200).json({
+              message: "User updated",
+              updatedUser: req.body
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).json({
+              error: err
+            })
+          })
+      }
+    })
+  } else {
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    })
+
+    User.updateOne({ _id: id }, { $set: user })
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "User updated",
+          updatedUser: req.body
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json({
+          error: err
+        })
+      })
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service'
 import { IPostDto } from '../models/post'
 import { Subscription } from 'rxjs'
+import { DataHandlerService } from '../services/data-handler.service'
 
 
 @Component({
@@ -21,18 +22,18 @@ export class ContentComponent implements OnInit {
   isLoading: boolean = false
 
   constructor(private apiService: ApiService) {
-  this.posts = this.apiService.userPosts
+
   }
 
   ngOnInit() {
-    
+
 
     //TODO move this to login component and make data-handler.service
-    
 
-  /*   this.isLoading = true
+
+    this.isLoading = true
     this.apiService.getAllUserPosts().subscribe(res => {
-      this.posts = res
+      this.posts = res.posts
       this.isLoading = false
     },
       error => {
@@ -43,12 +44,11 @@ export class ContentComponent implements OnInit {
     ),
       () => {
         this.isLoading = false
-        this.apiService.postUpdated.subscribe((res: IPostDto[]) => {
-          this.posts = res
+        this.apiService.postUpdated.subscribe(res => {
           console.log(res);
-          
+
         })
-      } */
+      }
   }
 
   onDelete(i) {
@@ -61,7 +61,8 @@ export class ContentComponent implements OnInit {
     },
       () => {
         this.apiService.getAllUserPosts().subscribe(res => {
-          this.posts = res
+          this.posts = res.posts
+
         })
       }
     )
@@ -81,6 +82,13 @@ export class ContentComponent implements OnInit {
   onClose() {
     this.showUpdateModal = null
 
+  }
+  onSubmit() {
+    this.showUpdateModal = null
+    this.apiService.getAllUserPosts().subscribe(res => {
+      this.posts = res.posts
+
+    })
   }
 
   ngOnDestroy() {

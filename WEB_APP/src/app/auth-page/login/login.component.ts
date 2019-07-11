@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ApiService } from '../../services/api.service'
+import { DataHandlerService } from '../../services/data-handler.service'
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false
 
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router,private dataHandlerService:DataHandlerService) { }
 
 
   ngOnInit() {
@@ -37,6 +38,8 @@ export class LoginComponent implements OnInit {
     this.apiService.login({ email, password }).subscribe(
       res => {
         this.isLoading = false
+        console.log(res);
+      
       },
       error => {
         console.log(error);
@@ -48,7 +51,6 @@ export class LoginComponent implements OnInit {
         console.log('done');
         this.isLoading = false
         this.errorMsg = null
-        this.apiService.getAllUserPosts().subscribe()
         this.router.navigate([`/content`])
 
 

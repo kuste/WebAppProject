@@ -6,7 +6,6 @@ const jobsSchema = mongoose.Schema({
   descr: { type: String, required: true },
   qualifications: { type: String, required: true },
   payment: { type: String, required: true },
-  lokacija: { type: String , required: true},
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   additionalInfo: { type: String },

@@ -9,15 +9,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PopupModalComponent implements OnInit {
   @Input() message: string
+  @Output() submit = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  onClose() {
-    this.close.emit()
+  onSubmit() {
+    this.submit.emit()
 
   }
-
+  onClose(){
+      this.close.emit()
+  }
+  
 }

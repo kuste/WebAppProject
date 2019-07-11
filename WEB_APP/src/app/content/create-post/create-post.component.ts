@@ -44,10 +44,11 @@ export class CreatePostComponent implements OnInit {
 
 
 
-    const newStartDate = new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime()
-    const newEndDate = new Date(this.endDate.year, this.endDate.month, this.endDate.day).getTime()
+    const newStartDate = new Date(this.startDate.year, this.startDate.month-1, this.startDate.day)
+    const newEndDate = new Date(this.endDate.year, this.endDate.month-1, this.endDate.day)
     let valid = newStartDate < newEndDate
 
+      
     if (valid && this.createForm.valid && this.user) {
       console.log('valid');
 
@@ -79,9 +80,8 @@ export class CreatePostComponent implements OnInit {
 
         },
         () => {
-          this.createForm.reset()
-          this.isLoading = false
-
+/*           this.createForm.reset()
+ */          this.isLoading = false
           this.router.navigate(['content'])
         }
       )

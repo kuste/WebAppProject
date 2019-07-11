@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Component, OnInit, EventEmitter, Output, AfterViewInit } from '@angular/core'
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms'
 import { ApiService } from '../../services/api.service'
-import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
 
 
@@ -24,12 +23,22 @@ export class EditPostComponent implements OnInit {
   user;
   post;
   postId;
-
-  constructor(private apiService: ApiService, private router: Router) { }
+  @Output() submit = new EventEmitter<void>()
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    this.createForm = new FormGroup({
+      'title': new FormControl(null, Validators.required),
+      'descr': new FormControl(null, Validators.required),
+      'qualifications': new FormControl(null, Validators.required),
+      'whatIsOffered': new FormControl(null, Validators.required),
+      'payment': new FormControl(null, Validators.required),
+      'additionalInfo': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
 
+    });
     this.user = JSON.parse(localStorage.getItem('userData'))
+
     this.apiService._updateId.pipe(take(1)).subscribe(res => {
       this.postId = res
 
@@ -40,40 +49,48 @@ export class EditPostComponent implements OnInit {
       () => {
         this.apiService.getOnePost(this.postId).subscribe(res => {
           this.post = res
+          const sDate = new Date(res.startDate)
+          const eDate = new Date(res.endDate)
 
+          this.startDate = {
+            year: sDate.getFullYear(),
+            month: sDate.getMonth() + 1,
+            day: sDate.getDate()
+          }
+
+          this.endDate = {
+            year: eDate.getFullYear(),
+            month: eDate.getMonth() + 1,
+            day: eDate.getDate()
+          }
         },
           err => {
             console.log(err);
           },
           () => {
-            this.createForm = new FormGroup({
-              'title': new FormControl(this.post.title, Validators.required),
-              'descr': new FormControl(this.post.descr, Validators.required),
-              'qualifications': new FormControl(this.post.qualifications, Validators.required),
-              'whatIsOffered': new FormControl(this.post.whatIsOffered, Validators.required),
-              'payment': new FormControl(this.post.payment, Validators.required),
-              'additionalInfo': new FormControl(this.post.additionalInfo, Validators.required),
-              'email': new FormControl(this.post.email, [Validators.required, Validators.email]),
+            this.createForm.get('title').setValue(this.post.title)
+            this.createForm.get('descr').setValue(this.post.descr)
+            this.createForm.get('qualifications').setValue(this.post.qualifications)
+            this.createForm.get('whatIsOffered').setValue(this.post.whatIsOffered)
+            this.createForm.get('payment').setValue(this.post.payment)
+            this.createForm.get('additionalInfo').setValue(this.post.additionalInfo)
+            this.createForm.get('email').setValue(this.post.contactEmail)
 
-            });
           })
       }
     )
-
-
 
   }
 
   onSubmit() {
 
-    const newStartDate = new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime()
-    const newEndDate = new Date(this.endDate.year, this.endDate.month, this.endDate.day).getTime()
+    const newStartDate = new Date(this.startDate.year, this.startDate.month - 1, this.startDate.day)
+    const newEndDate = new Date(this.endDate.year, this.endDate.month - 1, this.endDate.day)
     let valid = newStartDate < newEndDate
-
 
     if (valid && this.createForm.valid) {
       console.log('valid');
-     
+
       const post = {
         user: this.user.id,
         title: this.createForm.value.title,
@@ -87,13 +104,14 @@ export class EditPostComponent implements OnInit {
         contactEmail: this.createForm.value.email
 
       }
-      
+      console.log(this.post);
+
 
       this.isLoading = true
       this.apiService.updatePost(this.postId, post).subscribe(res => {
         console.log(res);
         this.isLoading = false
-        
+
 
       },
         error => {
@@ -102,9 +120,8 @@ export class EditPostComponent implements OnInit {
 
         },
         () => {
-/*           this.createForm.reset()
- */          this.isLoading = false
-        
+          this.isLoading = false
+          this.submit.emit()
 
         }
       )
